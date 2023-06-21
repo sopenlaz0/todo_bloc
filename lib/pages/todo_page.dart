@@ -22,41 +22,40 @@ class TodoListPage extends StatelessWidget {
               final todo = todoList[index];
               return Column(children: [
                 Slidable(
-                  endActionPane: ActionPane(
-                    motion: const DrawerMotion(),
-                    extentRatio: 0.4,
-                    children: [
-                      SlidableAction(
-                          // label: 'Edit,
-                          backgroundColor: Colors.blue,
-                          icon: Icons.edit,
+                    endActionPane: ActionPane(
+                      motion: const DrawerMotion(),
+                      extentRatio: 0.4,
+                      children: [
+                        SlidableAction(
+                            // label: 'Edit,
+                            backgroundColor: Colors.blue,
+                            icon: Icons.edit,
+                            onPressed: (context) =>
+                                todoBloc.add(EditTodoEvent(todo))),
+                        SlidableAction(
+                          // label: 'Delete',
+                          backgroundColor: Colors.red,
+                          icon: Icons.delete,
                           onPressed: (context) =>
-                              todoBloc.add(EditTodoEvent(todo))),
-                      SlidableAction(
-                        // label: 'Delete',
-                        backgroundColor: Colors.red,
-                        icon: Icons.delete,
-                        onPressed: (context) =>
-                            todoBloc.add(DeleteTodoEvent(todo)),
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    leading: Checkbox(
-                      value: todo.isComplete,
-                      onChanged: (_) {
-                        todoBloc.add(ToggleTodoEvent(todo));
-                      },
+                              todoBloc.add(DeleteTodoEvent(todo)),
+                        ),
+                      ],
                     ),
-                    title: Text(
-                      todo.title,
-                      style: TextStyle(
-                        decoration:
-                            todo.isComplete ? TextDecoration.lineThrough : null,
-                      ),
-                    ),
-                  ),
-                )
+                    child: ListTile(
+                        leading: Checkbox(
+                          value: todo.isComplete,
+                          onChanged: (_) {
+                            todoBloc.add(ToggleTodoEvent(todo));
+                          },
+                        ),
+                        title: Text(
+                          todo.title,
+                          style: TextStyle(
+                            decoration: todo.isComplete
+                                ? TextDecoration.lineThrough
+                                : null,
+                          ),
+                        )))
               ]);
             },
           );

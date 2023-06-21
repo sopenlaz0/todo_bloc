@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<TodoBloc>(
       create: (context) => TodoBloc(),
+      
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
         title: 'Todo App',
